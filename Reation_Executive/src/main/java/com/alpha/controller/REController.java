@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,11 +21,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alpha.model.Customer;
 import com.alpha.model.CustomerDocuments;
-import com.alpha.model.Enquiry;
 import com.alpha.service.REService;
 
 @RestController
-@RequestMapping("REAPI/")
+@RequestMapping("/REAPI")
 public class REController {
 	
 	@Autowired
@@ -37,12 +37,6 @@ public class REController {
 	}
 	
 	
-	@PostMapping("/saveEnquiry")
-	public ResponseEntity<String> saveEnquiry(@RequestBody Enquiry enquiry) {
-		service.saveEnquiry(enquiry);
-		
-		return new ResponseEntity<String>("Enquiry Data Saved", HttpStatus.CREATED);
-	}
 	
 	@PostMapping("/saveCustomerData")
 	public ResponseEntity<String> saveCustomerData(@RequestBody Customer customer) {
@@ -75,18 +69,16 @@ public class REController {
 		return new ResponseEntity<String>("Documents Uploaded", HttpStatus.OK);
 	}
 	
-	@GetMapping("/getEnquiry")
-	public ResponseEntity<List<Enquiry>> getAllEnquiry() {
-	List<Enquiry> list =  service.getAllEnquiry();
-		return new ResponseEntity<List<Enquiry>>(list,HttpStatus.OK);
-	}
+	
 	
 	@GetMapping("/getAllCustomer")
 	public ResponseEntity<List<Customer>> getAllCustomer() {
 	 	List<Customer> list = service.getAllCustomer();
 	 	
 	 	return new ResponseEntity<List<Customer>>(list, HttpStatus.OK);
+	 	
 	}
+	
 	
 	
 	
